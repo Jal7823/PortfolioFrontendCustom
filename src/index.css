@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+button:hover{
+    transition: 1s;
+    background-color: red;
+}
