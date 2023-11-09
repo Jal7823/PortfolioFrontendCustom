@@ -7,7 +7,7 @@ import {NavLink} from 'react-router-dom'
 function DetailsProjects() {
   const { id } = useParams();
 
-  const [Projects, setProjects] = useState({}); // Cambiado de [] a {}
+  const [Projects, setProjects] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
