@@ -35,12 +35,14 @@ const initialEdges = [
   { id: "e1-3", source: "2", target: "3" },
   // second item
   { id: "e2-4", source: "2", target: "4" },
-  { id: "e2-4", source: "2", target: "5" },
-  { id: "e2-4", source: "2", target: "6" },
+  { id: "e3-4", source: "2", target: "5" },
+  { id: "e4-4", source: "2", target: "6" },
 
-  { id: "e2-4", source: "1", target: "7" },
-  { id: "e2-4", source: "9", target: "8" },
+  { id: "e5-4", source: "1", target: "7" },
+  { id: "e6-4", source: "9", target: "8" },
 ];
+
+
 
 function About() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -48,7 +50,12 @@ function About() {
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
-  );
+    );
+    const styles = {
+      background: 'red',
+      width: '100%',
+      height: 300,
+    };
 
   return (
     <div className="bg-black h-screen text-white animate-in fade-in">
@@ -72,6 +79,7 @@ function About() {
           <div className="w-1/2">
             <div style={{ width: "100vw", height: "100vh" }}>
               <ReactFlow
+                styles={styles}
                 nodes={nodes}
                 edges={edges}
                 onNodesChange={onNodesChange}
