@@ -25,6 +25,7 @@ const initialNodes = [
   { id: "9", position: { x: 500, y: 400 }, data: { label: "CSS" } },
   // dependencies
   { id: "8", position: { x: 500, y: 500 }, data: { label: "Tailwind" } },
+  { id: "13", position: { x: 700, y: 500 }, data: { label: "Boostrap" } },
     // head
     { id: "10", position: { x: 200, y: 600 }, data: { label: "MySQL" } },
     { id: "11", position: { x: 400, y: 600 }, data: { label: "Notions" } },
@@ -37,6 +38,7 @@ const initialEdges = [
   { id: "e2-4", source: "2", target: "4" },
   { id: "e3-4", source: "2", target: "5" },
   { id: "e4-4", source: "2", target: "6" },
+  { id: "e4-4", source: "9", target: "13" },
 
   { id: "e5-4", source: "1", target: "7" },
   { id: "e6-4", source: "9", target: "8" },
