@@ -1,71 +1,54 @@
 import Title from "../components/Title";
 import ReactFlow, { useNodesState, useEdgesState, addEdge } from "reactflow";
 import "reactflow/dist/style.css";
-import { useCallback, useEffect, useState } from "react";
-import { getItems } from '../utils/crud';
+import { useCallback } from "react";
+
+const initialNodes = [
+  // head
+  { id: "2", position: { x: 400, y: 0 }, data: { label: "Python" } },
+  // dependencies
+  { id: "3", position: { x: 600, y: 200 }, data: { label: "Django" } },
+  { id: "4", position: { x: 200, y: 200 }, data: { label: "Flask" } },
+  {
+    id: "5",
+    position: { x: 700, y: 100 },
+    data: { label: "Django Rest Framework" },
+  },
+  { id: "6", position: { x: 75, y: 100 }, data: { label: "Flask" } },
+
+  // head
+  { id: "1", position: { x: 300, y: 400 }, data: { label: "JavaScript" } },
+  // dependencies
+  { id: "7", position: { x: 300, y: 500 }, data: { label: "React" } },
+
+  // head
+  { id: "9", position: { x: 500, y: 400 }, data: { label: "CSS" } },
+  // dependencies
+  { id: "8", position: { x: 500, y: 500 }, data: { label: "Tailwind" } },
+    // head
+    { id: "10", position: { x: 200, y: 600 }, data: { label: "MySQL" } },
+    { id: "11", position: { x: 400, y: 600 }, data: { label: "Notions" } },
+    { id: "12", position: { x: 600, y: 600 }, data: { label: "Insomnia" } },
+];
+const initialEdges = [
+  // flirts item
+  { id: "e1-3", source: "2", target: "3" },
+  // second item
+  { id: "e2-4", source: "2", target: "4" },
+  { id: "e2-4", source: "2", target: "5" },
+  { id: "e2-4", source: "2", target: "6" },
+
+  { id: "e2-4", source: "1", target: "7" },
+  { id: "e2-4", source: "9", target: "8" },
+];
 
 function About() {
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [languages, setLanguages] = useState([]);
-
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const onConnect = useCallback(
-    (params) => {
-      const newEdge = {
-        id: `e${params.source}-${params.target}`,
-        source: params.source,
-        target: params.target,
-      };
-  
-      setEdges((edges) => [...edges, newEdge]);
-    },
+    (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await getItems('/language/');
-        setLanguages(res);
-
-        // Crear nodos y dependencias desde la respuesta de la API
-        const apiNodes = res.map((language) => {
-          const mainNode = {
-            id: language.id.toString(),
-            position: { x: 200, y: 100 * language.id },
-            data: { label: language.name },
-          };
-
-          // Añadir subnodos desde el campo 'libraries'
-          const subNodes = language.libraries.map((library) => ({
-            id: `sub-${language.id}-${library.id}`,
-            position: { x: 200, y: 100 * language.id + 50 },
-            data: { label: library.name },
-          }));
-
-          return [mainNode, ...subNodes];
-        });
-
-        const flattenedNodes = [].concat(...apiNodes);
-
-        const apiEdges = flattenedNodes.reduce((acc, node) => {
-          const dependencies = languages.find((lang) => lang.id === parseInt(node.id))?.libraries.map((library) => ({
-            id: `e${node.id}-${library.id}`,
-            source: node.id,
-            target: `sub-${node.id}-${library.id}`,
-          })) || [];
-          return acc.concat(dependencies);
-        }, []);
-
-        setNodes(flattenedNodes);
-        setEdges(apiEdges);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    getData();
-  }, []);
 
   return (
     <div className="bg-black h-screen text-white animate-in fade-in">
@@ -99,6 +82,8 @@ function About() {
           </div>
         </div>
       </div>
+
+      {/* charts */}
     </div>
   );
 }
