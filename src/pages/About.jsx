@@ -10,7 +10,15 @@ function About() {
   const [languages, setLanguages] = useState([]);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params) => {
+      const newEdge = {
+        id: `e${params.source}-${params.target}`,
+        source: params.source,
+        target: params.target,
+      };
+  
+      setEdges((edges) => [...edges, newEdge]);
+    },
     [setEdges]
   );
 
@@ -19,7 +27,7 @@ function About() {
       try {
         const res = await getItems('/language/');
         setLanguages(res);
-  
+
         // Crear nodos y dependencias desde la respuesta de la API
         const apiNodes = res.map((language) => {
           const mainNode = {
@@ -27,41 +35,37 @@ function About() {
             position: { x: 200, y: 100 * language.id },
             data: { label: language.name },
           };
-  
+
           // Añadir subnodos desde el campo 'libraries'
           const subNodes = language.libraries.map((library) => ({
             id: `sub-${language.id}-${library.id}`,
             position: { x: 200, y: 100 * language.id + 50 },
             data: { label: library.name },
           }));
-  
+
           return [mainNode, ...subNodes];
         });
-  
+
         const flattenedNodes = [].concat(...apiNodes);
-  
+
         const apiEdges = flattenedNodes.reduce((acc, node) => {
-          const dependencies = node.data.label === languages.name
-            ? languages.libraries.map((library) => ({
-                id: `e${node.id}-${library.id}`,
-                source: node.id,
-                target: `sub-${languages.id}-${library.id}`,
-              }))
-            : [];
+          const dependencies = languages.find((lang) => lang.id === parseInt(node.id))?.libraries.map((library) => ({
+            id: `e${node.id}-${library.id}`,
+            source: node.id,
+            target: `sub-${node.id}-${library.id}`,
+          })) || [];
           return acc.concat(dependencies);
         }, []);
-  
+
         setNodes(flattenedNodes);
         setEdges(apiEdges);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-  
+
     getData();
   }, []);
-  console.log(languages);
-
 
   return (
     <div className="bg-black h-screen text-white animate-in fade-in">
