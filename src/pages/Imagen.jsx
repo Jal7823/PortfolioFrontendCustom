@@ -1,8 +1,8 @@
 
 function Imagen() {
   return (
-    <div className="flex justify-center content-center items-center">
-        <img className="w-[600px] h-[600px] object-scale-down" src="carnet.png" alt="" />
+    <div className="flex justify-center content-center items-center h-screen">
+        <img className="w-[400px] h-[400px] object-coontain rounded-full" src="logo.png" alt="" />
     </div>
   )
 }
