@@ -2,11 +2,11 @@ import Title from "../components/Title";
 
 function Contact() {
   return (
-    <div className="bg-black h-screen">
+    <div className="bg-black h-screen container mx-auto">
       <Title content='Contact me ' />
 
-      <div>
-        <form className="w-full max-w-lg mx-auto mt-8">
+      <div >
+        <form className="w-full max-w-lg mx-auto my-8">
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
