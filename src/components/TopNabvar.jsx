@@ -19,7 +19,7 @@ function TopNavbar() {
         <div id='menu' className={`flex flex-col justify-center text-center bg-black text-white text-[65px] md:text-[80px] h-screen ${showNavBar ? '' : 'hidden'}`}>
           <li><NavLink className={showNavBar ? '' : 'hidden'} to="/" onClick={hideNavbar}>Home</NavLink></li>
           <li><NavLink className={showNavBar ? '' : 'hidden'} to="/portfolio" onClick={hideNavbar}>Portfolio</NavLink></li>
-          <li><NavLink className={showNavBar ? '' : 'hidden'} to="/about" onClick={hideNavbar}>About</NavLink></li>
+          <li><NavLink className={showNavBar ? '' : 'hidden'} to="/about" onClick={hideNavbar}>About me</NavLink></li>
           <li><NavLink className={showNavBar ? '' : 'hidden'} to="/contact" onClick={hideNavbar}>Contact</NavLink></li>
         </div>
       </ul>

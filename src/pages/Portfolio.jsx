@@ -14,7 +14,6 @@ function Portfolio() {
     fetchData();
   }, []);
 
-
   return (
     <div className="bg-black text-white h-screen container mx-auto">
       <div className="bg-black text-white h-screen">
@@ -41,21 +40,11 @@ function Portfolio() {
                     </p>
                   </div>
                   <div className="px-6 pt-4 pb-2">
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      <NavLink to={el.github}>
-                        <i className="fa fa-github"></i>
-                      </NavLink>
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      <NavLink to={el.url}>
-                        <i className="fa fa-globe"></i>
-                      </NavLink>
-                    </span>
-                    <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                      <NavLink to={`/details/${el.id}`}>
-                        <i className="fa fa-eye"></i>
-                      </NavLink>
-                    </span>
+                    <NavLink to={`/details/${el.id}`}>
+                      <div className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2 w-[100%] text-center hover:text-white hover:bg-green-900     transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-y-105 hover:bg-green-700 duration-300">
+                        <i className="fa fa-eye "></i>
+                      </div>
+                    </NavLink>
                   </div>
                 </div>
               </div>
