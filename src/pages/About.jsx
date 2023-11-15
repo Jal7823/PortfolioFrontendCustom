@@ -2,7 +2,7 @@ import Title from "../components/Title"
 
 function About() {
   return (
-    <div className="bg-black h-screen text-white">
+    <div className="bg-black h-screen text-white animate-in fade-in">
         <Title content='About me'/>
         <div className="w-3/4">
           <div className="flex justify-around mt-4">

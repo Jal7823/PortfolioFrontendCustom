@@ -2,10 +2,15 @@ import { useParams } from "react-router-dom";
 import Title from "../components/Title";
 import { useEffect, useState } from "react";
 import Subtitle from "../components/Subtitle";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 
 function DetailsProjects() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
+  const handleHistory = ()=>{
+    navigate(-1)
+  }
 
   const [Projects, setProjects] = useState({});
 
@@ -22,7 +27,6 @@ function DetailsProjects() {
     fetchData();
   }, [id]);
 
-  console.log(Projects);
 
   return (
     <div className="bg-black text-white h-screen container mx-auto p-2">
@@ -179,6 +183,10 @@ function DetailsProjects() {
           )}
         </div>
       </div>
+      <div className="fixed bottom-8 right-8">
+        <i onClick={handleHistory} className="fa fa-arrow-circle-left text-2xl text-white"></i>
+      </div>
+
     </div>
   );
 }

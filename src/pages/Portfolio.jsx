@@ -16,7 +16,7 @@ function Portfolio() {
 
 
   return (
-    <div className="bg-black text-white h-screen">
+    <div className="bg-black text-white h-screen conatiner mx-auto">
       <div className="bg-black text-white h-screen">
         <Title content="Portfolio" />
 
