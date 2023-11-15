@@ -16,11 +16,11 @@ function Portfolio() {
 
 
   return (
-    <div className="bg-black text-white h-screen conatiner mx-auto">
+    <div className="bg-black text-white h-screen container mx-auto">
       <div className="bg-black text-white h-screen">
         <Title content="Portfolio" />
 
-        <div className="flex justify-around">
+        <div className="flex justify-around my-8">
           {Projects.length > 0 ? (
             Projects.map((el) => (
               <div className="flex justify-between text-white" key={el.id}>
